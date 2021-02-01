@@ -25,7 +25,7 @@ ylabel('t')
 zlabel('u')
 campos([-5.3442  -55.3079    6.65110])
 campos manual
-% animation
+disp('animation for increasing t')
 for i = 1:nt+1 ;  % loop over timesteps
     ts = t(i)*ones(size(x));
     % solution
@@ -36,11 +36,14 @@ for i = 1:nt+1 ;  % loop over timesteps
     drawnow
     pause(td/(nt+1));
 end
+disp('level lines')
 for i = -5:0.5:5
     tt = (x/i).^2;  % x./sqrt(tt) = i
-    u = 0.5*(1 + erf(i/2))*ones(size(x));
+    v=0.5*(1 + erf(i/2));
+    u = v*ones(size(x));
     tt= tt.*sign(u-0.5).*sign(x);
     plot3(x, tt, u,'k');
+    % input('> ')
 end
 hold off
 end

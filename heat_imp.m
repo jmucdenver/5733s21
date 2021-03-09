@@ -15,7 +15,7 @@ x=dx*[0:n+1]';
 one=ones(size(v));
 figure(gcf),clf, hold off   % clear and show figure window
 C=dx*dx/dt;
-A=spdiags(ones(n,1)*[-1,2+C,-1],[-1:1],n,n);
+M=spdiags(ones(n,1)*[-1,2+C,-1],[-1:1],n,n);
 for m=1:nt+1
     plot3(x,t*one,v),xlabel('x'),ylabel('t'),zlabel('v'),grid on,drawnow,hold on
     t = t+dt;
@@ -24,7 +24,7 @@ for m=1:nt+1
     % vnew(j) = v(j) + (vnew(j-1)-2*vnew(j)+vnew(j+1))*(dt/(dx*dx));
     % C= (dx*dx)/dt
     % (-vnew(j-1)+(2+C)*vnew(j)-vnew(j+1))=v*C
-    v(2:n+1)=A\v(2:n+1)*C;
+    v(2:n+1)=M\v(2:n+1)*C;
 end
 hold off
 end

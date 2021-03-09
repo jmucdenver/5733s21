@@ -6,17 +6,19 @@ function heat_exp(f,n,T)
 % nt points
 dx=1/(n+1)
 dt=0.50*dx*dx
+%  dt=dt*2
 r=dt/(dx*dx)
 nt=ceil(T/dt);
 v=zeros(1,n+2);
 % vnew=v;
 v=f(dx*[0:n+1]);
+v0=v;
 t=0;
 x=dx*[0:n+1];
 one=ones(1,n+2);
 figure(gcf),clf, hold off   % clear and show figure window
 for m=1:nt+1
-    plot3(x,t*one,v),xlabel('x'),ylabel('t'),zlabel('v'),grid on,drawnow,hold on
+    plot3(x,t*one,v),xlabel('x'),ylabel('t'),zlabel('v'),grid on,axis([0,1,0,T,min(v0),max(v0)]),drawnow,hold on
     t = t+dt;
     % need indexing from 1:n+2 instead 0:n+1
     vnew=zeros(1,n+2);

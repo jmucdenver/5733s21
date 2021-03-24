@@ -13,22 +13,34 @@ sol=c(1)*ones(size(xx))*0.5;
 k=0;
 mins=0;maxs=eps;
 figure(2)
-show
+% show
 for k=1:n
     sol = sol + c(k+1)*exp(-(k*pi)^2*tt).*cos(k*pi*xx);
+    tit=['n=',num2str(k)];
     show
 end
+tt_save=tt;
+xx_save=xx;
+sol_save=sol;
+figure(3)
+for t=2:N
+    xx=xx_save(:,1:t);
+    tt=tt_save(:,1:t);
+    sol=sol_save(:,1:t);
+    tit=['time=',num2str(tt(1,end))]
+    show
+end
+% mesh(sol)
     function show
-    clf
     mesh(xx,tt,sol)
     mins=min(min(sol(:)),mins);maxs=max(max(sol(:)),maxs);
     axis([0,1,0,T,mins,maxs])
-    title(['n=',num2str(k)])
+    title(tit)
     xlabel('x')
     ylabel('time')
     zlabel('u')
     drawnow
-    input('>');
+    pause(0.5)
     end
 end
 
